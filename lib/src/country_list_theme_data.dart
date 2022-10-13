@@ -31,6 +31,11 @@ class CountryListThemeData {
   /// By default it's fullscreen
   final double? bottomSheetHeight;
 
+  ///The style to use for the search input text.
+  ///
+  /// If null, the style will be set to [TextStyle(fontSize: 16)]
+  final TextStyle? searchTextStyle;
+
   const CountryListThemeData({
     this.backgroundColor,
     this.textStyle,
@@ -38,5 +43,6 @@ class CountryListThemeData {
     this.inputDecoration,
     this.borderRadius,
     this.bottomSheetHeight,
+    this.searchTextStyle,
   });
 }

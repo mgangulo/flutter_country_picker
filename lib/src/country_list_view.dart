@@ -139,6 +139,8 @@ class _CountryListViewState extends State<CountryListView> {
     final String searchLabel =
         CountryLocalizations.of(context)?.countryName(countryCode: 'search') ??
             'Search';
+    final TextStyle _searchTextStyle =
+        widget.countryListTheme?.searchTextStyle ?? _defaultTextStyle;
 
     return Column(
       children: <Widget>[
@@ -149,6 +151,7 @@ class _CountryListViewState extends State<CountryListView> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           child: TextField(
+            style: _searchTextStyle,
             autofocus: _searchAutofocus,
             controller: _searchController,
             decoration: widget.countryListTheme?.inputDecoration ??
