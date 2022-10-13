@@ -54,6 +54,7 @@ void showCountryPicker({
   bool searchAutofocus = false,
   bool showWorldWide = false,
   ValueWidgetBuilder<Country>? flagWidgetBuilder,
+  Widget? titleWidget,
 }) {
   assert(
     exclude == null || countryFilter == null,
@@ -71,5 +72,6 @@ void showCountryPicker({
     searchAutofocus: searchAutofocus,
     showWorldWide: showWorldWide,
     flagWidgetBuilder: flagWidgetBuilder,
+    titleWidget: titleWidget,
   );
 }

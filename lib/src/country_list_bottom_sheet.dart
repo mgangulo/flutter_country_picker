@@ -16,6 +16,7 @@ void showCountryListBottomSheet({
   bool searchAutofocus = false,
   bool showWorldWide = false,
   ValueWidgetBuilder<Country>? flagWidgetBuilder,
+  Widget? titleWidget,
 }) {
   showModalBottomSheet(
     context: context,
@@ -32,6 +33,7 @@ void showCountryListBottomSheet({
       searchAutofocus,
       showWorldWide,
       flagWidgetBuilder,
+      titleWidget,
     ),
   ).whenComplete(() {
     if (onClosed != null) onClosed();
@@ -49,6 +51,7 @@ Widget _builder(
   bool searchAutofocus,
   bool showWorldWide,
   ValueWidgetBuilder<Country>? flagWidgetBuilder,
+  Widget? titleWidget,
 ) {
   final device = MediaQuery.of(context).size.height;
   final statusBarHeight = MediaQuery.of(context).padding.top;
@@ -87,6 +90,7 @@ Widget _builder(
       searchAutofocus: searchAutofocus,
       showWorldWide: showWorldWide,
       flagWidgetBuilder: flagWidgetBuilder,
+      titleWidget: titleWidget,
     ),
   );
 }

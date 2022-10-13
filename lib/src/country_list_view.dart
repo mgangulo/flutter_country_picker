@@ -43,6 +43,9 @@ class CountryListView extends StatefulWidget {
   /// An optional argument for customizing the flag
   final ValueWidgetBuilder<Country>? flagWidgetBuilder;
 
+  /// An optional argument for a title widget
+  final Widget? titleWidget;
+
   const CountryListView({
     Key? key,
     required this.onSelect,
@@ -54,6 +57,7 @@ class CountryListView extends StatefulWidget {
     this.searchAutofocus = false,
     this.showWorldWide = false,
     this.flagWidgetBuilder,
+    this.titleWidget,
   })  : assert(
           exclude == null || countryFilter == null,
           'Cannot provide both exclude and countryFilter',
@@ -123,6 +127,9 @@ class _CountryListViewState extends State<CountryListView> {
     return Column(
       children: <Widget>[
         const SizedBox(height: 12),
+        if (widget.titleWidget!=null)...[
+          widget.titleWidget!,
+        ],
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           child: TextField(
