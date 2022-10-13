@@ -125,14 +125,11 @@ class Country {
     if (query.startsWith("+")) {
       _query = query.replaceAll("+", "").trim();
     }
+    String countryName = localizations
+        ?.countryName(countryCode: countryCode) ?? name;
     return phoneCode.contains(_query.toLowerCase()) ||
-        name.toLowerCase().contains(_query.toLowerCase()) ||
-        countryCode.toLowerCase().startsWith(_query.toLowerCase()) ||
-        (localizations
-                ?.countryName(countryCode: countryCode)
-                ?.toLowerCase()
-                .contains(_query.toLowerCase()) ??
-            false);
+        countryName.toLowerCase().contains(_query.toLowerCase()) ||
+        countryCode.toLowerCase().startsWith(_query.toLowerCase()) ;
   }
 
   bool get iswWorldWide => countryCode == Country.worldWide.countryCode;

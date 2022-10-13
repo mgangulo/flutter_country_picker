@@ -113,13 +113,25 @@ class _CountryListViewState extends State<CountryListView> {
       );
     }
 
+    _searchAutofocus = widget.searchAutofocus;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _countryList.sort((countryA, countryB) {
+
+      String countryAName = CountryLocalizations.of(context)
+          ?.countryName(countryCode: countryA.countryCode) ?? countryA.name;
+      String countryBName = CountryLocalizations.of(context)
+          ?.countryName(countryCode: countryB.countryCode) ?? countryB.name;
+      return countryAName.compareTo(countryBName);
+    });
     _filteredList = <Country>[];
     if (widget.showWorldWide) {
       _filteredList.add(Country.worldWide);
     }
     _filteredList.addAll(_countryList);
-
-    _searchAutofocus = widget.searchAutofocus;
   }
 
   @override
@@ -131,7 +143,7 @@ class _CountryListViewState extends State<CountryListView> {
     return Column(
       children: <Widget>[
         const SizedBox(height: 12),
-        if (widget.titleWidget!=null)...[
+        if (widget.titleWidget != null) ...[
           widget.titleWidget!,
         ],
         Padding(
@@ -224,7 +236,7 @@ class _CountryListViewState extends State<CountryListView> {
                   style: _textStyle,
                 ),
               ),
-              if (widget.showPhoneCodeOnEnd)...[
+              if (widget.showPhoneCodeOnEnd) ...[
                 SizedBox(
                   width: 45,
                   child: Text(
@@ -257,7 +269,7 @@ class _CountryListViewState extends State<CountryListView> {
           ),
         ),
       );
-    }else{
+    } else {
       return widget.flagWidgetBuilder!(context, country, null);
     }
   }
