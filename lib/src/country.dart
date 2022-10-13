@@ -125,8 +125,8 @@ class Country {
     if (query.startsWith("+")) {
       _query = query.replaceAll("+", "").trim();
     }
-    return phoneCode.startsWith(_query.toLowerCase()) ||
-        name.toLowerCase().startsWith(_query.toLowerCase()) ||
+    return phoneCode.contains(_query.toLowerCase()) ||
+        name.toLowerCase().contains(_query.toLowerCase()) ||
         countryCode.toLowerCase().startsWith(_query.toLowerCase()) ||
         (localizations
                 ?.countryName(countryCode: countryCode)

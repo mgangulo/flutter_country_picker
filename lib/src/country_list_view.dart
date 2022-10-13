@@ -40,6 +40,9 @@ class CountryListView extends StatefulWidget {
   /// An optional argument for showing "World Wide" option at the beginning of the list
   final bool showWorldWide;
 
+  /// An optional argument for customizing the flag
+  final ValueWidgetBuilder<Country>? flagWidgetBuilder;
+
   const CountryListView({
     Key? key,
     required this.onSelect,
@@ -50,6 +53,7 @@ class CountryListView extends StatefulWidget {
     this.countryListTheme,
     this.searchAutofocus = false,
     this.showWorldWide = false,
+    this.flagWidgetBuilder,
   })  : assert(
           exclude == null || countryFilter == null,
           'Cannot provide both exclude and countryFilter',
@@ -217,19 +221,23 @@ class _CountryListViewState extends State<CountryListView> {
   }
 
   Widget _flagWidget(Country country) {
-    final bool isRtl = Directionality.of(context) == TextDirection.rtl;
-    return SizedBox(
-      // the conditional 50 prevents irregularities caused by the flags in RTL mode
-      width: isRtl ? 50 : null,
-      child: Text(
-        country.iswWorldWide
-            ? '\uD83C\uDF0D'
-            : Utils.countryCodeToEmoji(country.countryCode),
-        style: TextStyle(
-          fontSize: widget.countryListTheme?.flagSize ?? 25,
+    if (widget.flagWidgetBuilder == null || country.iswWorldWide) {
+      final bool isRtl = Directionality.of(context) == TextDirection.rtl;
+      return SizedBox(
+        // the conditional 50 prevents irregularities caused by the flags in RTL mode
+        width: isRtl ? 50 : null,
+        child: Text(
+          country.iswWorldWide
+              ? '\uD83C\uDF0D'
+              : Utils.countryCodeToEmoji(country.countryCode),
+          style: TextStyle(
+            fontSize: widget.countryListTheme?.flagSize ?? 25,
+          ),
         ),
-      ),
-    );
+      );
+    }else{
+      return widget.flagWidgetBuilder!(context, country, null);
+    }
   }
 
   void _filterSearchResults(String query) {

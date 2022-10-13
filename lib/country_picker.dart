@@ -30,6 +30,8 @@ export 'src/country_service.dart';
 ///
 /// An optional [showPhoneCode] argument can be used to show phone code.
 ///
+/// [flagWidgetBuilder] can be used to customizing the flag widget instead of using the emoticon.
+///
 /// [countryListTheme] can be used to customizing the country list bottom sheet.
 ///
 /// [onClosed] callback which is called when CountryPicker is dismiss,
@@ -51,6 +53,7 @@ void showCountryPicker({
   CountryListThemeData? countryListTheme,
   bool searchAutofocus = false,
   bool showWorldWide = false,
+  ValueWidgetBuilder<Country>? flagWidgetBuilder,
 }) {
   assert(
     exclude == null || countryFilter == null,
@@ -67,5 +70,6 @@ void showCountryPicker({
     countryListTheme: countryListTheme,
     searchAutofocus: searchAutofocus,
     showWorldWide: showWorldWide,
+    flagWidgetBuilder: flagWidgetBuilder,
   );
 }
