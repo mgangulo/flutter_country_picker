@@ -131,7 +131,7 @@ class Country {
         (localizations
                 ?.countryName(countryCode: countryCode)
                 ?.toLowerCase()
-                .startsWith(_query.toLowerCase()) ??
+                .contains(_query.toLowerCase()) ??
             false);
   }
 
