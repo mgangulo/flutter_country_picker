@@ -17,6 +17,7 @@ void showCountryListBottomSheet({
   bool showWorldWide = false,
   ValueWidgetBuilder<Country>? flagWidgetBuilder,
   Widget? titleWidget,
+  bool showPhoneCodeOnEnd = false,
 }) {
   showModalBottomSheet(
     context: context,
@@ -34,6 +35,7 @@ void showCountryListBottomSheet({
       showWorldWide,
       flagWidgetBuilder,
       titleWidget,
+      showPhoneCodeOnEnd,
     ),
   ).whenComplete(() {
     if (onClosed != null) onClosed();
@@ -52,6 +54,7 @@ Widget _builder(
   bool showWorldWide,
   ValueWidgetBuilder<Country>? flagWidgetBuilder,
   Widget? titleWidget,
+  bool showPhoneCodeOnEnd,
 ) {
   final device = MediaQuery.of(context).size.height;
   final statusBarHeight = MediaQuery.of(context).padding.top;
@@ -91,6 +94,7 @@ Widget _builder(
       showWorldWide: showWorldWide,
       flagWidgetBuilder: flagWidgetBuilder,
       titleWidget: titleWidget,
+      showPhoneCodeOnEnd: showPhoneCodeOnEnd,
     ),
   );
 }

@@ -30,7 +30,11 @@ export 'src/country_service.dart';
 ///
 /// An optional [showPhoneCode] argument can be used to show phone code.
 ///
+/// An optional [showPhoneCodeOnEnd] argument can be used to show phone code at the end of row.
+///
 /// [flagWidgetBuilder] can be used to customizing the flag widget instead of using the emoticon.
+///
+/// [titleWidget] can be used to give the bottom sheet a title.
 ///
 /// [countryListTheme] can be used to customizing the country list bottom sheet.
 ///
@@ -55,6 +59,7 @@ void showCountryPicker({
   bool showWorldWide = false,
   ValueWidgetBuilder<Country>? flagWidgetBuilder,
   Widget? titleWidget,
+  bool showPhoneCodeOnEnd = false,
 }) {
   assert(
     exclude == null || countryFilter == null,
@@ -73,5 +78,6 @@ void showCountryPicker({
     showWorldWide: showWorldWide,
     flagWidgetBuilder: flagWidgetBuilder,
     titleWidget: titleWidget,
+    showPhoneCodeOnEnd: showPhoneCodeOnEnd,
   );
 }

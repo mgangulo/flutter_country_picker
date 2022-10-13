@@ -16,6 +16,9 @@ class CountryListView extends StatefulWidget {
   /// An optional [showPhoneCode] argument can be used to show phone code.
   final bool showPhoneCode;
 
+  /// An optional [showPhoneCode] argument can be used to show phone code on the end.
+  final bool showPhoneCodeOnEnd;
+
   /// An optional [exclude] argument can be used to exclude(remove) one ore more
   /// country from the countries list. It takes a list of country code(iso2).
   /// Note: Can't provide both [exclude] and [countryFilter]
@@ -58,6 +61,7 @@ class CountryListView extends StatefulWidget {
     this.showWorldWide = false,
     this.flagWidgetBuilder,
     this.titleWidget,
+    this.showPhoneCodeOnEnd = false,
   })  : assert(
           exclude == null || countryFilter == null,
           'Cannot provide both exclude and countryFilter',
@@ -88,7 +92,7 @@ class _CountryListViewState extends State<CountryListView> {
         countryCodes.map((country) => Country.from(json: country)).toList();
 
     //Remove duplicates country if not use phone code
-    if (!widget.showPhoneCode) {
+    if (!widget.showPhoneCode && !widget.showPhoneCodeOnEnd) {
       final ids = _countryList.map((e) => e.countryCode).toSet();
       _countryList.retainWhere((country) => ids.remove(country.countryCode));
     }
@@ -219,7 +223,18 @@ class _CountryListViewState extends State<CountryListView> {
                       country.name,
                   style: _textStyle,
                 ),
-              )
+              ),
+              if (widget.showPhoneCodeOnEnd)...[
+                SizedBox(
+                  width: 45,
+                  child: Text(
+                    '${isRtl ? '' : '+'}${country.phoneCode}${isRtl ? '+' : ''}',
+                    style: _textStyle,
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+                const SizedBox(width: 20),
+              ],
             ],
           ),
         ),
