@@ -1,6 +1,7 @@
 import 'package:country_picker/src/country_parser.dart';
 import 'package:country_picker/src/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:latinize/latinize.dart';
 
 import 'country_localizations.dart';
 
@@ -127,6 +128,7 @@ class Country {
     }
     String countryName = localizations
         ?.countryName(countryCode: countryCode) ?? name;
+    countryName = latinize(countryName);
     return phoneCode.contains(_query.toLowerCase()) ||
         countryName.toLowerCase().contains(_query.toLowerCase()) ||
         countryCode.toLowerCase().startsWith(_query.toLowerCase()) ;
