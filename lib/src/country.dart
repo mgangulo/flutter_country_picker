@@ -50,6 +50,10 @@ class Country {
   final String displayNameNoCountryCode;
   final String e164Key;
 
+  //Country minimun and max length for phones
+  final int minLength;
+  final int maxLength;
+
   @Deprecated(
     'The modern term is displayNameNoCountryCode. '
     'This feature was deprecated after v1.0.6.',
@@ -74,6 +78,8 @@ class Country {
     required this.displayNameNoCountryCode,
     required this.e164Key,
     this.fullExampleWithPlusSign,
+    this.maxLength = 0,
+    this.minLength = 0,
   });
 
   Country.from({required Map<String, dynamic> json})
@@ -87,7 +93,9 @@ class Country {
         displayName = json['display_name'],
         fullExampleWithPlusSign = json['full_example_with_plus_sign'],
         displayNameNoCountryCode = json['display_name_no_e164_cc'],
-        e164Key = json['e164_key'];
+        e164Key = json['e164_key'],
+        maxLength = json['maxLength'],
+        minLength = json['minLength'];
 
   static Country parse(String country) {
     if (country == worldWide.countryCode) {
@@ -118,6 +126,8 @@ class Country {
     data['full_example_with_plus_sign'] = fullExampleWithPlusSign;
     data['display_name_no_e164_cc'] = displayNameNoCountryCode;
     data['e164_key'] = e164Key;
+    data['minLength'] = minLength;
+    data['maxLength'] = maxLength;
     return data;
   }
 
